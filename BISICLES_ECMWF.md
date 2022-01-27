@@ -68,34 +68,6 @@ You need to choose a username and password, that will be asked when you check ou
   `svn co https://anag-repo.lbl.gov/svn/BISICLES/public/trunk BISICLES`
   
 I am using the main development branch here instead of the current release, as the current release doesn't support Python3. However, unlike for the Debian/Ubuntu build, it doesn't matter which version you use. 
-
-### Installing PETSc
-
-ECMWF already has version of PETSc pre-installed on cca, which we loaded at the beginning, however, I can't get it to work. So downloading from source may be an idea. Although I also had problems with compiling it with the HYPRE option enabled. 
-
-You can skip this if you don't want to use PETSc. If you have no idea what PETSc is or if you're not sure if you want it, then install PETSc. It seems to be the build to do these days. The [PETSc](https://www.mcs.anl.gov/petsc/index.html) website has useful information on what PETSc is, downloading and installing it. 
-
-* Download PETSc:
-  
-  `cd $BISICLES_HOME`:
-  
-  `git clone -b release https://gitlab.com/petsc/petsc.git petsc`
-
-* Configure PETSc:
-
-  Make a new directory for the actual installation:
-  
-  `mkdir -p $BISICLES_HOME/petsc-install`
-  
-  Change into the directory where you downloaded PETSc and configure:
-  
-  `cd $BISICLES_HOME/petsc`
-  
-  `./configure --download-fblaslapack=yes --download-hypre=yes -with-x=0 --with-c++support=yes --with-mpi=yes --with-hypre=yes --prefix=$BISICLES_HOME/petsc-install --with-c2html=0 --with-ssl=0`
-  
-  Go through the instructions then export the path to the petsc installation, which Chombo will refer to:
-
-  `export PETSC_DIR=$BISICLES_HOME/petsc-install`
   
 ### Chombo and BISICLES Configuration
   
