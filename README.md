@@ -8,4 +8,4 @@ Additional site specific build instructions:
 
 ## Pages
 
-1. [Common issues and warnings](https://BISICLES-users.github.io/warnings_issues)
+1. [Common issues and warnings](https://BISICLES-users.github.io/warning_issues)
