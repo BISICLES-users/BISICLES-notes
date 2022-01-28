@@ -1,13 +1,9 @@
 # ECMWF
 
-To use the ECMWF servers you need a token, I am assuming here that all of that is sorted and you know how to log on. When connecting you might run into this error:
-
-This can be fixed by adding the following to the ssh command:
-
-The solution to this problem is found here:
+To use the ECMWF servers you need a token, I am assuming here that all of that is sorted and you know how to log on.
 
 When you log on to ECMWF there are 3 choices: ecgate, cca and ccb. Most people seem to use cca. 
-Once you choose which server you want to use, you will automatically be in your home directory. If you type quota on the command line you will get your quota for $HOME (small but backup), $PERM (larger, not erased, no backup) and $SCRATCH (very large, but files are deleted after while). 
+Once you choose which server you want to use, you will automatically be in your home directory. If you type quota on the command line you will get your quota for $HOME (small but backup), $PERM (larger, not erased, no backup) and $SCRATCH (very large, but files are deleted after 2-3 weeks). 
 Typically you will install models on $PERM, and run them in $SCRATCH. 
 
 To change into the $PERM directory:
