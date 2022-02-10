@@ -4,8 +4,8 @@ For a complete and comprehensive set of instructions, consult the actual [BISICL
 
 Additional site specific build instructions:
 
-1. [ECMWF](https://BISICLES-users.github.io/BISICLES_ECMWF)
+1. [ECMWF](BISICLES_ECMWF.md)
 
 ## Pages
 
-1. [Common issues and warnings](https://BISICLES-users.github.io/warning_issues)
+1. [Common issues and warnings](warning_issues.md)
