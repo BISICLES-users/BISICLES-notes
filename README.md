@@ -6,6 +6,5 @@ Additional site specific build instructions:
 
 1. [ECMWF](BISICLES_ECMWF.md)
 
-## Pages
-
+## Other information
 1. [Common issues and warnings](warning_issues.md)
