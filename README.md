@@ -5,7 +5,7 @@ For a complete and comprehensive set of instructions, consult the actual [BISICL
 Additional site specific build instructions:
 
 1. [ECMWF](BISICLES_ECMWF.md)
-2. [Fedora](BISICLES_fedora.md)
+2. [Fedora](BISICLES_Fedora.md)
 
 ## Other information
 1. [Common issues and warnings](warning_issues.md)
