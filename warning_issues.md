@@ -29,3 +29,29 @@ I think this is something to do with openMPI and is just a warning, if this pops
         - If the file system is LUSTRE, ensure that the directory is mounted with the 'flock' option.
 
 On the KNMI HPC, this seems to be due to how the Lustre file system may be mounted and/or only seems to be a problem when compiling with the Intel MPI. I don't really have a solution to this other than to recompile with openMPI if possible. 
+
+* **Error related to LoadBalance.cpp when compiling Chombo on systems with newer GCC compilers:**
+
+        LoadBalance.cpp: In function ‘unsigned int mylog2(unsigned int)’:
+        LoadBalance.cpp:169:31: error: ‘numeric_limits’ is not a member of ‘std’
+          169 |     if (val == 0) return std::numeric_limits<unsigned int>::max();
+              |                               ^~~~~~~~~~~~~~
+        LoadBalance.cpp:169:46: error: expected primary-expression before ‘unsigned’
+          169 |     if (val == 0) return std::numeric_limits<unsigned int>::max();
+              |                                              ^~~~~~~~
+        LoadBalance.cpp:169:46: error: expected ‘;’ before ‘unsigned’
+          169 |     if (val == 0) return std::numeric_limits<unsigned int>::max();
+              |                                              ^~~~~~~~
+              |                                              ;
+        LoadBalance.cpp:169:58: error: expected unqualified-id before ‘>’ token
+          169 |     if (val == 0) return std::numeric_limits<unsigned int>::max();
+              |                                                          ^
+
+  This error might crop up if using a new compiler (especially if using new versions of Fedora or Ubuntu). To fix the issue try the following:
+
+1. Find the file `Chombo/lib/src/BoxTools/LoadBalance.cpp`
+2. Open it in a text editor
+3. find the line near the top that reads: 
+`#include <set>`
+4. Add a line below that: 
+`#include <limits>`
