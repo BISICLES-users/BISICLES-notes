@@ -60,7 +60,7 @@ You need to choose a username and password, that will be asked when you check ou
 
   `cp $BISICLES_HOME/BISICLES/docs/Make.defs.local $BISICLES_HOME`
   
-* Edit the `Make.defs.local` file so that it looks something like this:
+* Edit the `Make.defs.local` file so that it looks something like this (replace [PATH TO BISICLES_HOME] and [PATH TO HDF5] with the appropriate paths):
 
 ```
 ## Configuration variables
