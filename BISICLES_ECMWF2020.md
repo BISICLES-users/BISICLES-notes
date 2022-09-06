@@ -169,35 +169,8 @@ Then you should have a version of BISICLES that can run problems!
 
 ### Running an Example Problem
 
-Instructions on running jobs on cca can be found [here](https://confluence.ecmwf.int/display/UDOC/Batch+environment%3A++PBS). 
-To run jobs in parallel you need to use `aprun`. For BISICLES to run, you may need to set `LD_LIBRARY_PATH` to where the python libraries are located. 
+Instructions on running jobs on the new server can be found [here](https://confluence.ecmwf.int/display/UDOC/HPC2020%3A+Batch+system). HPC2020 uses the [slurm](https://slurm.schedmd.com/tutorials.html) system to submit batch jobs and therefore parallel jobs are submitted with the [sbatch command](https://slurm.schedmd.com/sbatch.html). 
 
-`export LD_LIBRARY_PATH=[python path]/lib`
+Here is an example of a BISICLES job submission: 
 
-If you run into a "file locking issue" you may want to set file locking to false. 
 
-`export HDF5_USE_FILE_LOCKING=FALSE`
-
-Here is an example of a simple submission script. 
-
-    #PBS -N HelloMPI
-    #PBS -q np
-    #PBS -l EC_total_tasks=72
-    #PBS -l EC_hyperthreads=1
-    #PBS -l walltime=48:00:00
-    #-------------------------------------------
-
-    # on compute node, change directory to 'submission directory':
-    cd $PBS_O_WORKDIR
-
-    # Define input files
-    export INFILEBASE="[input file]"
-    export INFILE=[input file].$PBS_JOBID
-    echo "INFILE = $INFILE"
-    cp $INFILEBASE $INFILE
-
-    export PYTHONPATH=`pwd`
-    export LD_LIBRARY_PATH=[python path]/lib
-    export HDF5_USE_FILE_LOCKING=FALSE
-
-    aprun -N $EC_tasks_per_node -n $EC_total_tasks -j $EC_hyperthreads $PERM/bisicles/BISICLES/code/exec2D/driver2d.Linux.64.CC.ftn.OPT.MPI.GNU.ex $INFILE > sout.0 2>err.0
