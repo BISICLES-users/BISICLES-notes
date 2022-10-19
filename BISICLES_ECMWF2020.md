@@ -1,4 +1,4 @@
-# ECMWF HPC2020
+# ECMWF HPC2020 ATOS
 
 To use the ECMWF servers you need a token, I am assuming here that all of that is sorted and you know how to log on. To log into the new server there are the following resources:
 
@@ -171,6 +171,46 @@ Then you should have a version of BISICLES that can run problems!
 
 Instructions on running jobs on the new server can be found [here](https://confluence.ecmwf.int/display/UDOC/HPC2020%3A+Batch+system). HPC2020 uses the [slurm](https://slurm.schedmd.com/tutorials.html) system to submit batch jobs and therefore parallel jobs are submitted with the [sbatch command](https://slurm.schedmd.com/sbatch.html). 
 
+Currently the modules need to be loaded at the top of the jobscript and LD_LIBRARY_PATH needs to be set for both python and hdf5 libraries for BISICLES to run.
+
 Here is an example of a BISICLES job submission: 
 
+    #!/bin/bash -l
+    #SBATCH -J testrun
+    #SBATCH -q np
+    #SBATCH --nodes=1
+    #SBATCH --cpus-per-task=1
+    #SBATCH --ntasks-per-node=128
+    #SBATCH -t 12:00:00
 
+    module load prgenv/gnu
+    module load python3/3.8.8-01
+    module load gcc/11.2.0
+    module load openmpi/4.1.1.1
+    module load hdf5-parallel/1.10.6
+    module load netcdf4-parallel/4.7.4
+
+    # Define driver 
+    export DRIVER=[Driver Path]
+
+    # Define input files
+    export INFILEBASE="[input file name]"
+    export INFILE=[input file name].$SLURM_JOBID
+    echo "INFILE = $INFILE"
+    cp $INFILEBASE $INFILE
+
+    export PYTHONPATH=`pwd`
+    export LD_LIBRARY_PATH=$HDF5_PARALLEL_DIR/lib:$PYTHON3_DIR/lib:$LD_LIBRARY_PATH
+    export CH_OUTPUT_INTERVAL=0
+
+     # work out what the latest checkpoint file is (if it exists)
+    if test -n "$(find -type f -name "chk.ant.??????.2d.hdf5" -print -quit)"
+        then
+        LCHK=`ls -th chk.ant.??????.2d.hdf5 | head -n 1`
+        echo "" >> $INFILE #ensure line break
+        echo "amr.restart_file=$LCHK" >> $INFILE
+        echo "amr.restart_set_time=false" >> $INFILE
+        echo "" >> $INFILE #ensure line break
+    fi
+
+     srun $DRIVER $INFILE
