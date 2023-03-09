@@ -21,7 +21,7 @@ module load prgenv/gnu
 module load git
 module load python3/3.8.8-01
 module load gcc/11.2.0
-module load openmpi/4.1.1.1
+module load hpcx-openmpi/2.9.0
 module load hdf5-parallel/1.10.6
 module load netcdf4-parallel/4.7.4
 ```
