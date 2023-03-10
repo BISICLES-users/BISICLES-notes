@@ -56,7 +56,7 @@ On the KNMI HPC, this seems to be due to how the Lustre file system may be mount
 4. Add a line below that: 
 `#include <limits>`
 
-* Chombo gives this error when compiling:
+* Chombo gives this error or similar when compiling:
 
         CellToEdge.cpp(17): catastrophic error: cannot open source file "CellToEdgeF_F.H"
           #include "CellToEdgeF_F.H"
