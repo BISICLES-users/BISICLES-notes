@@ -55,3 +55,20 @@ On the KNMI HPC, this seems to be due to how the Lustre file system may be mount
 `#include <set>`
 4. Add a line below that: 
 `#include <limits>`
+
+* Chombo gives this error when compiling:
+
+        CellToEdge.cpp(17): catastrophic error: cannot open source file "CellToEdgeF_F.H"
+          #include "CellToEdgeF_F.H"
+                                    ^
+
+        compilation aborted for CellToEdge.cpp (code 4)
+        make[3]: *** [/perm/nlcd/ecearth3-bisicles/r9411-cmip6-bisicles-knmi/sources/bisicles/Chombo/lib/src/BoxTools/../../mk/Make.rules:474: o/2d.Linux.64.mpicxx.mpifort.DEBUG.OPT.MPI/CellToEdge.o] Error 4
+        make[2]: *** [GNUmakefile:443: BoxTools] Error 2
+        make[1]: *** [/perm/nlcd/ecearth3-bisicles/r9411-cmip6-bisicles-knmi/sources/bisicles/Chombo/lib/mk/Make.rules:428: BoxTools] Error 2
+        make: *** [GNUmakefile:89: lib] Error 2
+
+This is due to the make being interrupted previously
+
+        cd Chombo/lib
+        make clean OPT=TRUE MPI=TRUE DEBUG=TRUE
